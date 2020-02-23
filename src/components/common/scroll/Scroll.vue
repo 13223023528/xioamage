@@ -41,11 +41,21 @@ export default {
     })
   },
   methods: {
+    // 封装返回顶部事件
     scrollTo(x, y, time = 300) {
-      this.scroll.scrollTo(x, y, time);
+      this.scroll && this.scroll.scrollTo(x, y, time);
     },
+    // 封装上拉事件
     finishPullUp() {
       this.scroll.finishPullUp();
+    },
+    // 封装重新计算 scroll 可滚动区域事件
+    refresh() {
+      this.scroll && this.scroll.refresh();
+    },
+    // 获取滚动高度
+    getScrollY() {
+      return this.scroll ? this.scroll.y : 0;
     }
   }
 };
