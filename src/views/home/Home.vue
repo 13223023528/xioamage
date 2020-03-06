@@ -27,7 +27,6 @@ import NavBar from "components/common/navbar/NavBar";
 import TabNav from "components/content/tabNav/TabNav";
 import GoodsList from "components/content/goods/GoodsList";
 import Scroll from "components/common/scroll/Scroll";
-import BackTop from "components/content/backTop/BackTop";
 
 import HomeSwiper from "./homeComponents/HomeSwiper";
 import HomeRecommend from "./homeComponents/HomeRecommend";
@@ -35,6 +34,7 @@ import HomePopular from "./homeComponents/HomePopular";
 
 import { getMultiData, getProductData } from "network/home.js";
 import { debounce } from "common/utils";
+import { backTop } from "common/mixin";
 export default {
   name: "Home",
   data() {
@@ -47,12 +47,12 @@ export default {
         sell: { page: 0, list: [] }
       },
       currentType: "pop",
-      isShowBackTo: false,
       tabNavOffsetTop: 0,
       isTabNav: false,
       saveY: 0
     };
   },
+  mixins: [backTop],
   components: {
     NavBar,
     HomeSwiper,
@@ -60,8 +60,7 @@ export default {
     HomePopular,
     TabNav,
     GoodsList,
-    Scroll,
-    BackTop
+    Scroll
   },
   created() {
     // 后台获取推荐数据
@@ -119,10 +118,6 @@ export default {
       };
       this.$refs.tabNav.currentIndex = index;
       this.$refs.tabNavShow.currentIndex = index;
-    },
-    // 返回顶部按钮
-    backClick() {
-      this.$refs.scroll.scrollTo(0, 0, 500);
     },
     
     contentScroll(position) {

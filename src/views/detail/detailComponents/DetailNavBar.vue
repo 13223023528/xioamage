@@ -8,6 +8,7 @@
         <div
           class="detail-nav-bar-center-item"
           v-for="(item, index) in titles"
+          :key="index"
           @click="detailNavBarItemClick(index)"
           :class="{actived: currentIndex == index}"
         >{{item}}</div>
@@ -31,6 +32,7 @@ export default {
   methods: {
     detailNavBarItemClick(index) {
       this.currentIndex = index;
+      this.$emit('topNavClick', index);
     },
     back() {
       this.$router.back();
